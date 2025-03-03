@@ -7,7 +7,7 @@ import { FaRegBell } from "react-icons/fa";
 import { FiMoon } from "react-icons/fi";
 import { IoIosArrowDown } from "react-icons/io";
 import { Avatar } from "@mui/material";
-import { useAuth } from "../API/authentication";
+import { useAuth } from "../contexts/authentication";
 
 export default function Navbar() {
   const { user } = useAuth();

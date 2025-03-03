@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { FaApple, FaFacebook, FaGoogle } from "react-icons/fa";
 import { Link } from "react-router";
-import { useAuth } from "../API/authentication";
+import { useAuth } from "../contexts/authentication";
 import { Alert } from "@mui/material";
 
 export default function SignupForm() {

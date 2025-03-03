@@ -15,7 +15,7 @@ import Support from "./components/Support";
 import PaymentOptions from "./components/PaymentOptions";
 import { AmountProvider } from "./contexts/AmountContext";
 import PaymentSuccess from "./components/PaymentSuccess";
-import { AuthProvider } from "./API/authentication";
+import { AuthProvider } from "./contexts/authentication";
 import ChangePassword from "./pages/ChangePassword";
 function App() {
   return (
