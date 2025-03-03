@@ -120,11 +120,6 @@ export default function SignupForm() {
             </Link>
           </p>
         </span>
-        <p>
-          <Link to="/home/dashboard" className="text-blue-700">
-            Dashboard
-          </Link>
-        </p>
       </div>
     </div>
   );
