@@ -1,4 +1,4 @@
-import { createContext, useState, useContext } from "react";
+import { createContext, useState, useContext, useEffect } from "react";
 import axios from "axios";
 import { Navigate, useNavigate } from "react-router";
 
@@ -13,6 +13,7 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState({});
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [token, setToken] = useState(localStorage.getItem("authToken") || "");
   const navigate = useNavigate();
 
   const signIn = async (formData) => {
@@ -25,8 +26,14 @@ export const AuthProvider = ({ children }) => {
         { headers: { "Content-Type": "application/json" } }
       );
 
-      setUser(response?.data?.data?.user); // Assuming API returns user details
-      console.log(response?.data?.data?.user);
+      const userData = response?.data?.data?.user; // Assuming API returns user details
+      const authToken = response.data.data.token;
+
+      localStorage.setItem("userData", JSON.stringify(userData));
+      localStorage.setItem("authToken", authToken);
+
+      setToken(authToken);
+      setUser(userData);
       navigate("/home/dashboard");
     } catch (err) {
       setError(err.response?.data?.message || "Something went wrong");
@@ -55,8 +62,20 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  useEffect(() => {
+    const storedUser = localStorage.getItem("userData");
+    const storedToken = localStorage.getItem("authToken");
+
+    if (storedUser && storedToken) {
+      setUser(JSON.parse(storedUser));
+      setToken(storedToken);
+    }
+  }, []);
+
   return (
-    <AuthContext.Provider value={{ user, signUp, signIn, loading, error }}>
+    <AuthContext.Provider
+      value={{ user, signUp, signIn, token, loading, error }}
+    >
       {children}
     </AuthContext.Provider>
   );

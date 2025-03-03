@@ -39,7 +39,7 @@ export default function SignupForm() {
               </label>
               <input
                 placeholder="Enter your name"
-                className="focus:outline-none rounded-lg shadow-lg bg-white mb-8 w-38 p-3"
+                className="focus:outline-none rounded-lg shadow-lg bg-white mb-8 w-38 mx-auto p-3"
                 type="text"
                 id="first_name"
                 name="first_name"
@@ -53,7 +53,7 @@ export default function SignupForm() {
               </label>
               <input
                 placeholder="Enter your name"
-                className="focus:outline-none rounded-lg shadow-lg bg-white mb-8 w-38 p-3"
+                className="focus:outline-none rounded-lg shadow-lg bg-white mb-8 w-38 p-3 mx-auto"
                 type="text"
                 id="last_name"
                 name="last_name"

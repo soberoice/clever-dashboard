@@ -17,6 +17,7 @@ import { AmountProvider } from "./contexts/AmountContext";
 import PaymentSuccess from "./components/PaymentSuccess";
 import { AuthProvider } from "./contexts/authentication";
 import ChangePassword from "./pages/ChangePassword";
+import PrivateRoute from "./components/PrivateRoute";
 function App() {
   return (
     <BrowserRouter>

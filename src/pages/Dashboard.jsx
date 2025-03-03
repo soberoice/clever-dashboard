@@ -1,10 +1,13 @@
 import React from "react";
 import SideNav from "../components/SideNav";
 import Navbar from "../components/Navbar";
-import { BrowserRouter, Outlet, Route, Routes } from "react-router";
+import { BrowserRouter, Navigate, Outlet, Route, Routes } from "react-router";
+import { useAuth } from "../contexts/authentication";
 
 export default function Dashboard() {
-  return (
+  const { user, token } = useAuth();
+
+  return user && token ? (
     <div
       style={{ color: "#343A40", backgroundColor: "#F9FAFB" }}
       className="font-semibold"
@@ -17,5 +20,7 @@ export default function Dashboard() {
         </div>
       </div>
     </div>
+  ) : (
+    <Navigate to="/" replace />
   );
 }

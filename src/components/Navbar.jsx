@@ -8,16 +8,27 @@ import { FiMoon } from "react-icons/fi";
 import { IoIosArrowDown } from "react-icons/io";
 import { Avatar } from "@mui/material";
 import { useAuth } from "../contexts/authentication";
+import { useNavigate } from "react-router";
+import axios from "axios";
 
 export default function Navbar() {
   const { user } = useAuth();
-  const [toggle, setToggle] = useState(false);
-  const name = "john smith";
+  // const user = localStorage.getItem("userData");
+  const navigate = useNavigate();
+  // Function to clear storage and redirect
+  const handleLogout = () => {
+    localStorage.removeItem("authToken");
+    localStorage.removeItem("userData"); // Clear token
+    setUser({});
+    navigate("/signin"); // Redirect to login page
+  };
+
   return (
     <div
       style={{ borderBottom: "1px solid #E9ECEF" }}
       className="flex w-full px-8 mt-3 h-20 items-center text-xl border-b-1 bg-white"
     >
+      {console.log(user)}
       <div className="font-semibold">
         Welcome, {user?.first_name} {user?.last_name}
       </div>
@@ -49,7 +60,8 @@ export default function Navbar() {
           <AccordionDetails className="text-center ">
             <button
               style={{ width: "190px", color: "red", border: "1px solid red" }}
-              className="bg-white h-15 text-red rounded-xl "
+              className="bg-white h-15 text-red rounded-xl cursor-pointer"
+              onClick={handleLogout}
             >
               Sign Out
             </button>
