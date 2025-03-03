@@ -21,9 +21,9 @@ export default function SecurityInfo() {
                 width: "390px",
                 marginTop: "10px",
               }}
-              placeholder="John"
+              placeholder="Old Password"
               className="px-4 rounded-xl"
-              type="text"
+              type="passwors"
             />
           </span>
           <span className="flex flex-col">
@@ -37,9 +37,9 @@ export default function SecurityInfo() {
                 width: "390px",
                 marginTop: "10px",
               }}
-              placeholder="Smith"
+              placeholder="New Password"
               className="px-4 rounded-xl"
-              type="text"
+              type="password"
             />
           </span>
           <span className="flex flex-col">
@@ -55,7 +55,7 @@ export default function SecurityInfo() {
               }}
               placeholder="Confirm New Password"
               className="px-4 rounded-xl"
-              type="Text"
+              type="password"
             />
           </span>
         </form>

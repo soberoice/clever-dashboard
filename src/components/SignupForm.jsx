@@ -20,7 +20,6 @@ export default function SignupForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
     signUp(formData);
-    navigate("/home/dashboard");
   };
 
   return (

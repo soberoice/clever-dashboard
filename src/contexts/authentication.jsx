@@ -10,10 +10,19 @@ export const useAuth = () => useContext(AuthContext);
 
 // Auth Provider Component
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState(() => {
+    const storedUser = localStorage?.getItem("userData");
+    try {
+      return storedUser ? JSON.parse(storedUser) : null;
+    } catch (error) {
+      // console.error("Failed to parse userData:", error);
+      return null;
+    }
+  });
+  const [token, setToken] = useState(localStorage?.getItem("authToken") || "");
+  const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [token, setToken] = useState(localStorage.getItem("authToken") || "");
   const navigate = useNavigate();
 
   const signIn = async (formData) => {
@@ -47,13 +56,14 @@ export const AuthProvider = ({ children }) => {
     setLoading(true);
     setError(null);
     try {
-      const response = await axios.post(
+      const updateResponse = await axios.post(
         "https://smsapi-0110.jarapay.ng/api/v1/auth/register",
         formData,
         { headers: { "Content-Type": "application/json" } }
       );
 
       //   setUser(response?.data?.user);
+      console.log(updateResponse);
       navigate("/signin");
     } catch (err) {
       setError(err.response?.data?.message || "Something went wrong");
@@ -62,19 +72,47 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  useEffect(() => {
-    const storedUser = localStorage.getItem("userData");
-    const storedToken = localStorage.getItem("authToken");
+  const updateProfile = async (formData) => {
+    setLoading(true);
+    setError(null);
+    setMessage("");
+    try {
+      const response = await axios.post(
+        "https://smsapi-0110.jarapay.ng/api/v1/user/update_profile",
+        formData,
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
 
-    if (storedUser && storedToken) {
-      setUser(JSON.parse(storedUser));
-      setToken(storedToken);
+      const updatedUser = response.data.data;
+      console.log(updatedUser);
+      setUser(updatedUser);
+      localStorage.setItem("userData", JSON.stringify(updatedUser));
+
+      //   setUser(response?.data?.user);
+
+      setMessage("Account Updated Successfully");
+    } catch (err) {
+      setError(err.response?.data?.message || "Something went wrong");
+    } finally {
+      setLoading(false);
     }
-  }, []);
+  };
 
   return (
     <AuthContext.Provider
-      value={{ user, signUp, signIn, token, loading, error }}
+      value={{
+        user,
+        setUser,
+        signUp,
+        signIn,
+        token,
+        setToken,
+        loading,
+        error,
+        updateProfile,
+        message,
+        setMessage,
+      }}
     >
       {children}
     </AuthContext.Provider>

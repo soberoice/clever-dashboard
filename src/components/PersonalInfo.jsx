@@ -1,17 +1,41 @@
-import React from "react";
+import React, { useState } from "react";
 import { MdOutlineEmail } from "react-icons/md";
+import { useAuth } from "../contexts/authentication";
+import { Alert, CircularProgress } from "@mui/material";
 
 export default function PersonalInfo() {
-  const emailIcon = <MdOutlineEmail />;
+  const { loading, updateProfile, user, message } = useAuth();
+  const [formData, setFormData] = useState({
+    first_name: user?.first_name || "",
+    last_name: user?.last_name || "",
+    dob: user?.dob || "",
+    country: user?.country || "",
+    company_name: user?.company_nmae || "",
+    phone: user?.phone || "",
+    city: user?.city || "",
+    state: user?.state || "",
+  });
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const result = await updateProfile(formData);
+    console.log(result);
+  };
 
   return (
     <div style={{ width: "837px", height: "450px" }} className="flex flex-col">
+      {message && <Alert className="success mb-4">{message}</Alert>}
       <p className="text-bold text-2xl pb-8">Personal Information</p>
       <div>
         <form
           action=""
           style={{ gridTemplateColumns: "50% 50%" }}
           className="grid gap-4"
+          onSubmit={handleSubmit}
         >
           <span className="flex flex-col">
             <label className="" htmlFor="First Name">
@@ -24,9 +48,12 @@ export default function PersonalInfo() {
                 width: "390px",
                 marginTop: "10px",
               }}
+              onChange={handleChange}
               placeholder="John"
               className="px-4 rounded-xl"
               type="text"
+              id="first_name"
+              name="first_name"
             />
           </span>
           <span className="flex flex-col">
@@ -40,9 +67,12 @@ export default function PersonalInfo() {
                 width: "390px",
                 marginTop: "10px",
               }}
+              onChange={handleChange}
               placeholder="Smith"
               className="px-4 rounded-xl"
               type="text"
+              id="last_name"
+              name="last_name"
             />
           </span>
           <span className="flex flex-col">
@@ -58,6 +88,8 @@ export default function PersonalInfo() {
               }}
               className="px-4 rounded-xl"
               type="date"
+              id="dob"
+              name="dob"
             />
           </span>
           <span className="flex flex-col">
@@ -71,14 +103,17 @@ export default function PersonalInfo() {
                 width: "390px",
                 marginTop: "10px",
               }}
+              onChange={handleChange}
               placeholder="+123 456 7890"
               className="px-4 rounded-xl"
               type="number"
+              id="phone"
+              name="phone"
             />
           </span>
           <span className="flex flex-col">
             <label className="" htmlFor="Email">
-              Email
+              Company Name
             </label>
             <input
               style={{
@@ -87,9 +122,10 @@ export default function PersonalInfo() {
                 width: "390px",
                 marginTop: "10px",
               }}
-              placeholder={` hellouihut@gmail.com`}
               className="px-4 rounded-xl"
-              type="Email"
+              type="text"
+              id="company-name"
+              name="company-name"
             />
           </span>
           <span className="flex flex-col">
@@ -103,9 +139,12 @@ export default function PersonalInfo() {
                 width: "390px",
                 marginTop: "10px",
               }}
+              onChange={handleChange}
               placeholder="Nigeria"
               className="px-4 rounded-xl"
               type="text"
+              id="country"
+              name="country"
             />
           </span>
           <span className="flex flex-col">
@@ -119,14 +158,17 @@ export default function PersonalInfo() {
                 width: "390px",
                 marginTop: "10px",
               }}
+              onChange={handleChange}
               placeholder="Lagos"
               className="px-4 rounded-xl"
               type="text"
+              id="state"
+              name="state"
             />
           </span>
           <span className="flex flex-col">
             <label className="" htmlFor="Location">
-              Location
+              city
             </label>
             <input
               style={{
@@ -135,19 +177,35 @@ export default function PersonalInfo() {
                 width: "390px",
                 marginTop: "10px",
               }}
+              onChange={handleChange}
               placeholder="Ikeja"
               className="px-4 rounded-xl"
               type="text"
+              id="city"
+              name="city"
             />
           </span>
+          <button
+            style={{
+              backgroundColor: "#4263EB",
+              width: "831px",
+              height: "45px",
+            }}
+            className="text-white rounded-xl mt-12 p-2"
+            type="submit"
+            disabled={loading}
+          >
+            {loading ? (
+              <CircularProgress
+                color="inherit"
+                size="20px"
+                className="my-auto"
+              />
+            ) : (
+              "Update"
+            )}
+          </button>
         </form>
-        <button
-          style={{ backgroundColor: "#4263EB", width: "831px", height: "45px" }}
-          className="text-white rounded-xl mt-12 p-2"
-          type="submit"
-        >
-          Update
-        </button>
       </div>
     </div>
   );

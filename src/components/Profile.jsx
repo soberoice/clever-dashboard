@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import PersonalInfo from "./PersonalInfo";
 import SecurityInfo from "./SecurityInfo";
+import { useAuth } from "../contexts/authentication";
 
 export default function Profile() {
+  const { setMessage } = useAuth();
   const [active, setActive] = useState("myProfile");
   return (
     <div className="mx-auto w-11/12 mb-12">
@@ -32,7 +34,10 @@ export default function Profile() {
               borderRadius: "4px",
             }}
             className="text-white"
-            onClick={() => setActive("myProfile")}
+            onClick={() => {
+              setActive("myProfile");
+              setMessage("");
+            }}
           >
             My Profile
           </button>
@@ -45,7 +50,10 @@ export default function Profile() {
               color: active === "security" ? "white" : "#9B9B9B",
             }}
             className=""
-            onClick={() => setActive("security")}
+            onClick={() => {
+              setActive("security");
+              setMessage("");
+            }}
           >
             Security
           </button>

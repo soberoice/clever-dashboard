@@ -13,13 +13,17 @@ import axios from "axios";
 
 export default function Navbar() {
   const { user } = useAuth();
+  const string = `${user?.first_name?.slice(0, 1)}${user?.last_name?.slice(
+    0,
+    1
+  )}`;
   // const user = localStorage.getItem("userData");
   const navigate = useNavigate();
   // Function to clear storage and redirect
   const handleLogout = () => {
     localStorage.removeItem("authToken");
     localStorage.removeItem("userData"); // Clear token
-    setUser({});
+    // setUser({});
     navigate("/signin"); // Redirect to login page
   };
 
@@ -47,7 +51,7 @@ export default function Navbar() {
           <AccordionSummary>
             <Typography>
               <span className="flex">
-                <Avatar className="mr-2">{user?.username?.slice(0, 1)}</Avatar>
+                <Avatar className="mr-2">{string?.toUpperCase()}</Avatar>
                 <span className="flex flex-col text-sm my-auto">
                   <span>{user?.username}</span>
                   {console.log(user)}
