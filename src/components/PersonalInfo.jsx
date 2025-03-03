@@ -1,10 +1,15 @@
 import React, { useState } from "react";
 import { MdOutlineEmail } from "react-icons/md";
 import { useAuth } from "../contexts/authentication";
-import { Alert, CircularProgress } from "@mui/material";
+import { Alert, CircularProgress, Snackbar } from "@mui/material";
+import { IoClose } from "react-icons/io5";
+import { IoIosCheckmarkCircleOutline } from "react-icons/io";
 
 export default function PersonalInfo() {
-  const { loading, updateProfile, user, message } = useAuth();
+  const vertical = "top";
+  const horizontal = "right";
+  const { loading, updateProfile, user, message, setMessage } = useAuth();
+  const [open, setOpen] = useState(false);
   const [formData, setFormData] = useState({
     first_name: user?.first_name || "",
     last_name: user?.last_name || "",
@@ -25,10 +30,34 @@ export default function PersonalInfo() {
     const result = await updateProfile(formData);
     console.log(result);
   };
-
   return (
     <div style={{ width: "837px", height: "450px" }} className="flex flex-col">
-      {message && <Alert className="success mb-4">{message}</Alert>}
+      {message && (
+        <Snackbar
+          open={true}
+          autoHideDuration={1200}
+          anchorOrigin={{ vertical, horizontal }}
+          slots="Fade"
+        >
+          <span
+            style={{
+              height: "100px",
+              backgroundColor: "green",
+              color: "white",
+              fontSize: "18px",
+            }}
+            className="p-4 text-center flex items-center justify-between rounded-xl"
+          >
+            <p className="flex items-center">
+              <IoIosCheckmarkCircleOutline className="font-bold" />
+              {message}
+            </p>
+            <button className="mb-auto ml-auto" onClick={() => setMessage("")}>
+              <IoClose />
+            </button>
+          </span>
+        </Snackbar>
+      )}
       <p className="text-bold text-2xl pb-8">Personal Information</p>
       <div>
         <form
