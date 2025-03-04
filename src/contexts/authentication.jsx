@@ -45,7 +45,7 @@ export const AuthProvider = ({ children }) => {
 
       setToken(authToken);
       setUser(userData);
-      navigate("/home/dashboard");
+      navigate("/dashboard");
       setMessage("Signed in Successfully");
       setTimeout(() => {
         setMessage("");

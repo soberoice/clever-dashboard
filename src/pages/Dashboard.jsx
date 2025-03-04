@@ -12,6 +12,7 @@ export default function Dashboard() {
       style={{ color: "#343A40", backgroundColor: "#F9FAFB" }}
       className="font-semibold"
     >
+      <Navigate to="/dashboard" />
       <div className="flex w-full">
         <SideNav />
         <div className="flex flex-col w-10/12">
@@ -21,6 +22,6 @@ export default function Dashboard() {
       </div>
     </div>
   ) : (
-    <Navigate to="/" replace />
+    <Navigate to="/signup" replace />
   );
 }

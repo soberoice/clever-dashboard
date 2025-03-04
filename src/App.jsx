@@ -24,11 +24,11 @@ function App() {
       <AuthProvider>
         <AmountProvider>
           <Routes>
-            <Route path="/" exact element={<Signup />} />
+            <Route path="/signup" exact element={<Signup />} />
             <Route path="/signin" element={<Signin />} />
             <Route path="/forgot-password" element={<ResetPassword />} />
             <Route path="/changepassword" element={<ChangePassword />} />
-            <Route exact path="/home" element={<Dashboard />}>
+            <Route exact path="/" element={<Dashboard />}>
               <Route path="dashboard" element={<DashboardContent />} />
               <Route path="settings" element={<Settings />} />
               <Route path="reports" element={<Reports />} />
