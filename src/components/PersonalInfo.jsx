@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { MdOutlineEmail } from "react-icons/md";
 import { useAuth } from "../contexts/authentication";
 import { Alert, CircularProgress, Snackbar } from "@mui/material";
-import { IoClose } from "react-icons/io5";
+import { IoClose, IoCloseCircleOutline } from "react-icons/io5";
 import { IoIosCheckmarkCircleOutline } from "react-icons/io";
 
 export default function PersonalInfo() {
@@ -32,32 +32,21 @@ export default function PersonalInfo() {
   };
   return (
     <div style={{ width: "837px", height: "450px" }} className="flex flex-col">
-      {message && (
-        <Snackbar
-          open={true}
-          autoHideDuration={1200}
-          anchorOrigin={{ vertical, horizontal }}
-          slots="Fade"
-        >
-          <span
-            style={{
-              height: "100px",
-              backgroundColor: "green",
-              color: "white",
-              fontSize: "18px",
-            }}
-            className="p-4 text-center flex items-center justify-between rounded-xl"
-          >
-            <p className="flex items-center">
-              <IoIosCheckmarkCircleOutline className="font-bold" />
-              {message}
-            </p>
-            <button className="mb-auto ml-auto" onClick={() => setMessage("")}>
-              <IoClose />
-            </button>
-          </span>
-        </Snackbar>
-      )}
+      <Snackbar
+        open={message}
+        autoHideDuration={1200}
+        anchorOrigin={{ vertical, horizontal }}
+      >
+        <Alert security="success">
+          <p className="flex items-center flex justify-between w-60">
+            {message}
+            <IoCloseCircleOutline
+              className="mb-auto ml-auto text-xl"
+              onClick={() => setMessage("")}
+            />
+          </p>
+        </Alert>
+      </Snackbar>
       <p className="text-bold text-2xl pb-8">Personal Information</p>
       <div>
         <form
@@ -115,7 +104,7 @@ export default function PersonalInfo() {
                 width: "390px",
                 marginTop: "10px",
               }}
-              className="px-4 rounded-xl"
+              className="px-4 rounded-xl text-gray-500"
               type="date"
               id="dob"
               name="dob"

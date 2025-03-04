@@ -2,10 +2,13 @@ import React, { useState } from "react";
 import { FaFacebook } from "react-icons/fa";
 import { Link } from "react-router";
 import { useAuth } from "../contexts/authentication";
-import { Alert, CircularProgress } from "@mui/material";
+import { Alert, CircularProgress, Snackbar } from "@mui/material";
+import { IoCloseCircleOutline } from "react-icons/io5";
 
 export default function SigninForm() {
-  const { signIn, loading, error } = useAuth();
+  const vertical = "top";
+  const horizontal = "right";
+  const { signIn, loading, error, setError } = useAuth();
   const [formData, setFormData] = useState({
     login: "",
     password: "",
@@ -22,6 +25,17 @@ export default function SigninForm() {
   };
   return (
     <div>
+      <Snackbar open={error} anchorOrigin={{ vertical, horizontal }}>
+        <Alert severity="error">
+          <p className="flex items-center flex justify-between w-60">
+            {error}
+            <IoCloseCircleOutline
+              className="mb-auto ml-auto text-xl"
+              onClick={() => setError("")}
+            />
+          </p>
+        </Alert>
+      </Snackbar>
       <div
         style={{ backgroundColor: "#F7F9FF" }}
         className="mt-12 rounded-2xl flex flex-col py-4 px-12 w-100 h-80vh items-center"
@@ -55,7 +69,6 @@ export default function SigninForm() {
           <Link to="/forgot-password">
             <p className="text-sm text-gray-700 mb-2">Forgot password?</p>
           </Link>
-          {error && <Alert severity="error">{error}</Alert>}
           <button
             type="submit"
             className="hover:bg-blue-400 bg-blue-500 w-80 rounded-lg py-2 cursor-pointer text-white mb-2"

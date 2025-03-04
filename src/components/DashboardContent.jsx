@@ -3,10 +3,31 @@ import { FaRegCheckCircle } from "react-icons/fa";
 import { IoMdClose } from "react-icons/io";
 import Cards from "./Cards";
 import MessageReportsTable from "./MessageReportsTable";
+import { useAuth } from "../contexts/authentication";
+import { Alert, Snackbar } from "@mui/material";
+import { IoCloseCircleOutline } from "react-icons/io5";
 
 export default function DashboardContent() {
+  const vertical = "top";
+  const horizontal = "right";
+  const { message, setMessage } = useAuth();
   return (
     <div className="w-11/12 mx-auto">
+      <Snackbar
+        open={message}
+        autoHideDuration={1200}
+        anchorOrigin={{ vertical, horizontal }}
+      >
+        <Alert security="success">
+          <p className="flex items-center flex justify-between w-60">
+            {message}
+            <IoCloseCircleOutline
+              className="mb-auto ml-auto text-xl"
+              onClick={() => setMessage("")}
+            />
+          </p>
+        </Alert>
+      </Snackbar>
       <div className="mx-auto mt-5 flex-col w-full">
         <div
           className="flex rounded-lg p-8"

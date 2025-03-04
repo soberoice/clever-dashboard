@@ -2,18 +2,42 @@ import React, { useContext, useState } from "react";
 import { IoMdClose } from "react-icons/io";
 import { Link } from "react-router";
 import AmountContext from "../contexts/AmountContext";
+import { Alert, Snackbar } from "@mui/material";
+import { IoCloseCircleOutline } from "react-icons/io5";
 
 export default function FundWalletForm({ toggleModal }) {
+  const vertical = "top";
+  const horizontal = "right";
   const { amount, setAmount } = useContext(AmountContext);
   const [value, setValue] = useState("");
+  const [message, setMessage] = useState("");
 
   function handleProceed() {
-    setAmount(value);
-    console.log(value);
+    if (value >= 100) {
+      setAmount(value);
+      localStorage.setItem("amountToPay", value);
+      console.log(value);
+    } else {
+      setMessage("Amount to Low");
+      setTimeout(() => {
+        setMessage("");
+      }, 6000);
+    }
   }
 
   return (
     <div className="modal">
+      <Snackbar open={message} anchorOrigin={{ vertical, horizontal }}>
+        <Alert severity="warning">
+          <p className="flex items-center flex justify-between w-60">
+            {message}
+            <IoCloseCircleOutline
+              className="mb-auto ml-auto text-xl"
+              onClick={() => setMessage("")}
+            />
+          </p>
+        </Alert>
+      </Snackbar>
       <div onClick={toggleModal} className="overlay"></div>
       <div
         style={{ width: "594px", height: "396px" }}
@@ -40,10 +64,10 @@ export default function FundWalletForm({ toggleModal }) {
               value={value}
             />
           </span>
-          <Link to={"/home/payment-options"}>
+          <Link to={value >= 100 && "/home/payment-options"}>
             <button
               onClick={handleProceed}
-              className="w-full text-white rounded-xl"
+              className="w-full text-white rounded-xl cursor-pointer"
               style={{
                 backgroundColor: "#4263EB",
                 width: "500px",

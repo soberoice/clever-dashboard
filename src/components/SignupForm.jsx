@@ -2,10 +2,13 @@ import React, { useState } from "react";
 import { FaApple, FaFacebook, FaGoogle } from "react-icons/fa";
 import { Link } from "react-router";
 import { useAuth } from "../contexts/authentication";
-import { Alert } from "@mui/material";
+import { Alert, CircularProgress, Snackbar } from "@mui/material";
+import { IoCloseCircleOutline } from "react-icons/io5";
 
 export default function SignupForm() {
-  const { signUp, loading, error } = useAuth();
+  const vertical = "top";
+  const horizontal = "right";
+  const { signUp, loading, error, setError } = useAuth();
   const [formData, setFormData] = useState({
     first_name: "",
     last_name: "",
@@ -24,6 +27,17 @@ export default function SignupForm() {
 
   return (
     <div>
+      <Snackbar open={error} anchorOrigin={{ vertical, horizontal }}>
+        <Alert severity="error">
+          <p className="flex items-center flex justify-between w-60">
+            {error}
+            <IoCloseCircleOutline
+              className="mb-auto ml-auto text-xl"
+              onClick={() => setError("")}
+            />
+          </p>
+        </Alert>
+      </Snackbar>
       <div
         style={{ backgroundColor: "#F7F9FF" }}
         className="mt-12 rounded-2xl flex flex-col py-4 px-12 w-100 items-center"
@@ -86,14 +100,17 @@ export default function SignupForm() {
             required
           />
           <p className="text-sm text-gray-400 mb-2">8 characters at least</p>
-          {error && <Alert severity="error">{error}</Alert>}
           <button
             type="submit"
             className="hover:bg-blue-400 bg-blue-500 w-80 rounded-lg py-2 cursor-pointer text-white mb-2 mt-4"
             disabled={loading}
           >
             {loading ? (
-              <CircularProgress size="20px" className="my-auto" />
+              <CircularProgress
+                color="inhert"
+                size="20px"
+                className="my-auto"
+              />
             ) : (
               "Register"
             )}

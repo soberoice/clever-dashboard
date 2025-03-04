@@ -25,9 +25,11 @@ export const AuthProvider = ({ children }) => {
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
+  //SIGN IN FUNCTION
   const signIn = async (formData) => {
     setLoading(true);
     setError(null);
+    setMessage("");
     try {
       const response = await axios.post(
         "https://smsapi-0110.jarapay.ng/api/v1/auth/login",
@@ -44,10 +46,17 @@ export const AuthProvider = ({ children }) => {
       setToken(authToken);
       setUser(userData);
       navigate("/home/dashboard");
+      setMessage("Signed in Successfully");
+      setTimeout(() => {
+        setMessage("");
+      }, 6000);
     } catch (err) {
       setError(err.response?.data?.message || "Something went wrong");
     } finally {
       setLoading(false);
+      setTimeout(() => {
+        setError("");
+      }, 9000);
     }
   };
 
@@ -69,9 +78,13 @@ export const AuthProvider = ({ children }) => {
       setError(err.response?.data?.message || "Something went wrong");
     } finally {
       setLoading(false);
+      setTimeout(() => {
+        setError("");
+      }, 9000);
     }
   };
 
+  //UPDATE PROFILE FUNCTION
   const updateProfile = async (formData) => {
     setLoading(true);
     setError(null);
@@ -91,27 +104,65 @@ export const AuthProvider = ({ children }) => {
       //   setUser(response?.data?.user);
 
       setMessage("Account Updated Successfully");
+      setTimeout(() => {
+        setMessage("");
+      }, 9000);
     } catch (err) {
       setError(err.response?.data?.message || "Something went wrong");
     } finally {
       setLoading(false);
+      setTimeout(() => {
+        setError("");
+      }, 9000);
+    }
+  };
+
+  const initializeTransaction = async (email, amount) => {
+    const payload = {
+      email: email,
+      amount: amount * 100, // Convert Naira to kobo
+      reference: `ref_${Math.floor(Math.random() * 1000000000)}`, // Unique transaction reference
+      callback_url: "https://yourdomain.com/verify-payment", // Your callback URL
+    };
+
+    try {
+      const response = await axios.post(
+        "https://api.paystack.co/transaction/initialize",
+        payload,
+        {
+          headers: {
+            Authorization: `Bearer YOUR_SECRET_KEY`, // Replace with your Paystack secret key
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      // Redirect the user to the authorization URL
+      window.location.href = response.data.data.authorization_url;
+    } catch (error) {
+      console.error(
+        "Error initializing transaction:",
+        error.response ? error.response.data : error.message
+      );
     }
   };
 
   return (
     <AuthContext.Provider
       value={{
-        user,
         setUser,
+        user,
         signUp,
-        signIn,
         token,
-        setToken,
+        signIn,
         loading,
+        setToken,
         error,
         updateProfile,
         message,
         setMessage,
+        initializeTransaction,
+        setError,
       }}
     >
       {children}

@@ -22,7 +22,7 @@ export default function Wallets() {
           <span className="flex gap-8  ">
             <img
               style={{ width: "153px", height: "120px" }}
-              src="../public/illustration.png"
+              src="/Illustration.png"
               alt="ilustration.png"
             />
             <span style={{ widows: "130px" }} className="flex gap-2 flex-col">
