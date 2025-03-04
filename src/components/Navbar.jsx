@@ -20,6 +20,7 @@ export default function Navbar() {
   const navigate = useNavigate();
   // Function to clear storage and redirect
   const handleLogout = () => {
+    window.location.reload();
     setMessage("Signed out Successfully");
     localStorage.removeItem("authToken");
     localStorage.removeItem("userData"); // Clear token
@@ -27,8 +28,6 @@ export default function Navbar() {
     setTimeout(() => {
       setMessage("");
     }, 6000);
-
-    navigate("/signin"); // Redirect to login page
   };
 
   return (

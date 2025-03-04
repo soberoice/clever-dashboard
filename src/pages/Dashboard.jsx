@@ -1,7 +1,7 @@
 import React from "react";
 import SideNav from "../components/SideNav";
 import Navbar from "../components/Navbar";
-import { BrowserRouter, Navigate, Outlet, Route, Routes } from "react-router";
+import { Navigate, Outlet } from "react-router";
 import { useAuth } from "../contexts/authentication";
 
 export default function Dashboard() {
