@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import SideNav from "../components/SideNav";
 import Navbar from "../components/Navbar";
-import { Navigate, Outlet } from "react-router";
+import { Navigate, Outlet, useNavigate } from "react-router";
 import { useAuth } from "../contexts/authentication";
 
 export default function Dashboard() {
+  const navigate = useNavigate();
   const { user, token } = useAuth();
 
   return user && token ? (
@@ -12,7 +13,9 @@ export default function Dashboard() {
       style={{ color: "#343A40", backgroundColor: "#F9FAFB" }}
       className="font-semibold"
     >
-      <Navigate to="/dashboard" />
+      {useEffect(() => {
+        navigate("/dashboard");
+      }, [])}
       <div className="flex w-full">
         <SideNav />
         <div className="flex flex-col w-10/12">
@@ -22,6 +25,6 @@ export default function Dashboard() {
       </div>
     </div>
   ) : (
-    <Navigate to="/signup" replace />
+    <Navigate to="/signin" replace />
   );
 }

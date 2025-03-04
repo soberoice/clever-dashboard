@@ -17,7 +17,7 @@ export default function RecentTransactions() {
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead sx={{ bgcolor: "#F9FAFB" }}>
-            <TableRow>
+            <TableRow className="font-bold text-xl">
               <TableCell sx={{ width: "500px" }}>Transaction ID</TableCell>
               <TableCell sx={{ width: "500px" }} align="right">
                 Transactions
