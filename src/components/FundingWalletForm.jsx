@@ -8,14 +8,14 @@ import { IoCloseCircleOutline } from "react-icons/io5";
 export default function FundWalletForm({ toggleModal }) {
   const vertical = "top";
   const horizontal = "right";
-  const { amount, setAmount } = useContext(AmountContext);
+  const { amount, setAmount, error, setError } = useContext(AmountContext);
   const [value, setValue] = useState("");
   const [message, setMessage] = useState("");
 
   function handleProceed() {
     if (value >= 100) {
       setAmount(value);
-      localStorage.setItem("amountToPay", value);
+      localStorage.setItem("amountToPay", JSON.stringify(value));
       console.log(value);
     } else {
       setMessage("Amount to Low");
@@ -34,6 +34,17 @@ export default function FundWalletForm({ toggleModal }) {
             <IoCloseCircleOutline
               className="mb-auto ml-auto text-xl"
               onClick={() => setMessage("")}
+            />
+          </p>
+        </Alert>
+      </Snackbar>
+      <Snackbar open={error} anchorOrigin={{ vertical, horizontal }}>
+        <Alert severity="warning">
+          <p className="flex items-center flex justify-between w-60">
+            {error}
+            <IoCloseCircleOutline
+              className="mb-auto ml-auto text-xl"
+              onClick={() => setError("")}
             />
           </p>
         </Alert>
@@ -64,7 +75,7 @@ export default function FundWalletForm({ toggleModal }) {
               value={value}
             />
           </span>
-          <Link to={value >= 100 && "/home/payment-options"}>
+          <Link to={value >= 100 && "/payment-options"}>
             <button
               onClick={handleProceed}
               className="w-full text-white rounded-xl cursor-pointer"

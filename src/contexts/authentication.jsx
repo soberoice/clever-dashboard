@@ -24,6 +24,7 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+  // const amount = localStorage?.getItem("amountToPay");
 
   //SIGN IN FUNCTION
   const signIn = async (formData) => {
@@ -42,6 +43,8 @@ export const AuthProvider = ({ children }) => {
 
       localStorage.setItem("userData", JSON.stringify(userData));
       localStorage.setItem("authToken", authToken);
+
+      console.log(response);
 
       setToken(authToken);
       setUser(userData);
@@ -117,33 +120,41 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const initializeTransaction = async (email, amount) => {
-    const payload = {
-      email: email,
-      amount: amount * 100, // Convert Naira to kobo
-      reference: `ref_${Math.floor(Math.random() * 1000000000)}`, // Unique transaction reference
-      callback_url: "https://yourdomain.com/verify-payment", // Your callback URL
+  // FUNCTION FOR FUNDING WALLET
+  const initializeTransaction = async (amount) => {
+    const amountPayload = {
+      amount: amount,
     };
+    setMessage("");
+    setLoading(true);
+    setError(null);
 
     try {
+      console.log(amount);
       const response = await axios.post(
-        "https://api.paystack.co/transaction/initialize",
-        payload,
-        {
-          headers: {
-            Authorization: `Bearer YOUR_SECRET_KEY`, // Replace with your Paystack secret key
-            "Content-Type": "application/json",
-          },
-        }
+        "https://smsapi-0110.jarapay.ng/api/v1/payment/paystack/initialize",
+        amountPayload,
+        { headers: { Authorization: `Bearer ${token}` } }
       );
-
+      console.log(response);
       // Redirect the user to the authorization URL
-      window.location.href = response.data.data.authorization_url;
+      window.location.href = response.data.data[0].url;
+
+      setMessage("Paystack Initialized");
+      setTimeout(() => {
+        setMessage("");
+      }, 9000);
     } catch (error) {
+      setError(err.response?.data?.message || "Something went wrong");
       console.error(
         "Error initializing transaction:",
         error.response ? error.response.data : error.message
       );
+    } finally {
+      setLoading(false);
+      setTimeout(() => {
+        setError("");
+      }, 9000);
     }
   };
 

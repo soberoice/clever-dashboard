@@ -35,6 +35,7 @@ export default function Navbar() {
       style={{ borderBottom: "1px solid #E9ECEF" }}
       className="flex w-full px-8 mt-3 h-20 items-center text-xl border-b-1 bg-white"
     >
+      {/* {console.log(user)} */}
       <div className="font-semibold">
         Welcome, {user?.first_name} {user?.last_name}
       </div>

@@ -1,9 +1,12 @@
 import {
+  Alert,
   Box,
+  CircularProgress,
   Divider,
   ListItemIcon,
   Radio,
   RadioGroup,
+  Snackbar,
   Stack,
 } from "@mui/material";
 import React, { useContext, useState } from "react";
@@ -17,12 +20,15 @@ import ListItemText from "@mui/material/ListItemText";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Checkbox from "@mui/material/Checkbox";
 import { useAuth } from "../contexts/authentication";
+import { IoCloseCircleOutline } from "react-icons/io5";
 
 export default function PaymentOptions() {
-  const { loading } = useAuth();
+  const { loading, message, initializeTransaction } = useAuth();
   const [checked, setChecked] = React.useState([0]);
   const { amount } = useContext(AmountContext);
   const [selectedValue, setSelectedValue] = useState("a");
+  const vertical = "top";
+  const horizontal = "right";
 
   const handleChange = (event) => {
     setSelectedValue(event.target.value);
@@ -39,8 +45,28 @@ export default function PaymentOptions() {
 
     setChecked(newChecked);
   };
+
+  function handleClick() {
+    initializeTransaction(amount);
+  }
   return (
     <div className="mt-8 w-12/12 flex justify-center">
+      <Snackbar
+        open={message}
+        autoHideDuration={1200}
+        anchorOrigin={{ vertical, horizontal }}
+      >
+        <Alert security="success">
+          <p className="flex items-center flex justify-between w-60">
+            {message}
+            <IoCloseCircleOutline
+              className="mb-auto ml-auto text-xl"
+              onClick={() => setMessage("")}
+            />
+          </p>
+        </Alert>
+      </Snackbar>
+      {console.log(amount)}
       <div className="w-11/12 mx-auto">
         <Link to={"/home/wallets"} className="m-4">
           <p
@@ -61,8 +87,8 @@ export default function PaymentOptions() {
               const labelId = `checkbox-list-label-${value}`;
 
               return (
-                <Box>
-                  <ListItem key={value} className="" disablePadding>
+                <Box key={value}>
+                  <ListItem className="" disablePadding>
                     <ListItemButton
                       role={undefined}
                       sx={{ height: "92.01px" }}
@@ -113,22 +139,22 @@ export default function PaymentOptions() {
               <p>SUBTOTAL</p>
               <p className="text-black text-bold">&#x20A6; {amount}</p>
             </span>
-            <Link to={"/home/payment-successful"}>
-              <button
-                className="w-full text-white rounded-xl mt-8"
-                style={{
-                  backgroundColor: "#4263EB",
-                  width: "374px",
-                  height: "45px",
-                }}
-              >
-                {loading ? (
-                  <CircularProgress size="20px" className="my-auto" />
-                ) : (
-                  "Proceed"
-                )}
-              </button>
-            </Link>
+            <button
+              className="w-full text-white rounded-xl mt-8"
+              style={{
+                backgroundColor: "#4263EB",
+                width: "374px",
+                height: "45px",
+              }}
+              onClick={handleClick}
+              disabled={loading}
+            >
+              {loading ? (
+                <CircularProgress size="20px" className="my-auto" />
+              ) : (
+                "Proceed"
+              )}
+            </button>
           </div>
         </span>
       </div>
