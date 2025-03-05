@@ -7,10 +7,10 @@ export default function Profile() {
   const { setMessage } = useAuth();
   const [active, setActive] = useState("myProfile");
   return (
-    <div className="mx-auto w-11/12 mb-12">
+    <div className="md:mx-auto w-screen md:w-11/12 mb-12">
       <div
         style={{ height: "798px" }}
-        className="flex bg-white md:w-full my-8 flex flex-col p-8 w-screen"
+        className="flex bg-white md:w-full my-8 flex flex-col p-8 w-11/12 mx-auto"
       >
         <p
           style={{ color: "#1B212D" }}
