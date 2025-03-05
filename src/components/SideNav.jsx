@@ -7,27 +7,27 @@ export default function SideNav({ toggle, setToggle }) {
   return (
     <div
       style={{ borderRight: "1px solid #E9ECEF" }}
-      className={`md:flex md:relative left-0 fixed border-gray-300 justify-evenly flex-col transition-all duration-300 md:w-80 md:p-3 h-screen border-r text-base bg-white z-10 ${
+      className={`md:flex md:relative left-0 fixed border-gray-300 justify-evenly flex-col transition-all duration-300 md:w-80 md:p-3 h-screen border-r text-base bg-white z-10 overflow-hidden  ${
         toggle ? "w-10/12" : "w-0"
       }`}
     >
       <IoMdClose
-        className={`absolute top-4 right-4 text-4xl cursor-pointer md:hidden ${
+        className={`absolute top-4 right-4 text-3xl z-50 md:hidden ${
           toggle ? "block" : "hidden"
         }`}
         onClick={() => setToggle((prev) => !prev)}
       />
       <div
         className={`${
-          toggle ? "flex" : "hidden"
-        } flex-col m-5 md:flex transition-all duration-300`}
+          toggle ? "block" : "hidden"
+        } flex-col m-5 md:flex transition-all duration-300 flex-nowrap w-full flex-nowrap transition-all duration-300`}
       >
-        <span className="flex text-2xl font-bold mt-auto mb-4 items-center">
-          <img
-            style={{ width: "40px", height: "40px" }}
-            src="/mail-02.png"
-            alt=""
-          />
+        <span
+          className={`flex text-2xl font-bold mt-auto mb-4 items-center  w-full ${
+            toggle ? "w-full" : "w-0"
+          }`}
+        >
+          <img src="/mail-02.png" alt="" className="w-9 h-9" />
           <p className="my-auto">Good Mail</p>
         </span>
 
@@ -38,7 +38,7 @@ export default function SideNav({ toggle, setToggle }) {
             className={({ isActive }) =>
               `rounded-lg block p-3 flex flex-row gap-2 text-base w-full ${
                 isActive ? "bg-blue-500 text-white" : "text-black"
-              }`
+              } ${toggle ? "w-full" : "w-0"}`
             }
             onClick={() => {
               setToggle(false);
