@@ -53,7 +53,7 @@ export default function DashboardContent() {
       </Snackbar>
       <div className="flex justify-center mt-5 flex-col w-11/12">
         <div
-          className="flex rounded-lg p-8 w-80 md:w-full mx-auto"
+          className="flex rounded-lg p-4 px-2 md:p-8 w-80 md:w-full mx-auto"
           style={{
             backgroundColor: "#155EEF1A",
             border: "1px solid #155EEF1A",

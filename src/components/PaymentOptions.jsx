@@ -50,7 +50,7 @@ export default function PaymentOptions() {
     initializeTransaction(amount);
   }
   return (
-    <div className="mt-8 w-12/12 flex justify-center">
+    <div className="mt-8 w-screen md:w-12/12 flex justify-center">
       <Snackbar
         open={message}
         autoHideDuration={1200}
@@ -77,10 +77,10 @@ export default function PaymentOptions() {
             Back
           </p>
         </Link>
-        <span className="flex mx-auto w-full justify-between">
+        <span className="flex mx-auto w-full justify-between flex-col md:flex-row">
           <List
-            className="bg-white shadow-xs flex flex-col justify-evenly rounded-xl"
-            sx={{ height: "auto", width: "750px" }}
+            className="bg-white w-full md:w-7/12 shadow-xs flex flex-col justify-evenly rounded-xl"
+            sx={{ height: "auto" }}
           >
             {" "}
             {[0, 1, 2].map((value) => {
@@ -95,21 +95,11 @@ export default function PaymentOptions() {
                       onClick={handleToggle(value)}
                     >
                       <ListItemIcon>
-                        <Radio
-                          edge="start"
-                          checked={checked.includes(value)}
-                          tabIndex={-1}
-                          disableRipple
-                        />
+                        <Radio checked={checked.includes(value)} />
                       </ListItemIcon>
-                      <Stack direction={"row"} gap="20px">
-                        <img
-                          src="/cards.png"
-                          style={{ width: "36px" }}
-                          alt=""
-                          className=""
-                        />
-                        <span>
+                      <Stack direction={"row"} className="gap-1 md:gap-8">
+                        <img src="/cards.png" alt="" className="" />
+                        <span className="text-xs md:text-lg">
                           <p>Fund wallet with Flutterwave</p>{" "}
                           <p>Make payment using your debit card</p>
                         </span>
@@ -122,8 +112,8 @@ export default function PaymentOptions() {
             })}
           </List>
           <div
-            style={{ width: "420px", height: "270px" }}
-            className="bg-white flex items-center justify-center flex-col rounded-xl shadow-sm"
+            style={{ height: "270px" }}
+            className="bg-white w-full md:w-4/12 flex items-center justify-center flex-col rounded-xl shadow-sm mt-4 md:mt-0"
           >
             <span
               style={{ width: "290px", height: "48px" }}
@@ -140,10 +130,9 @@ export default function PaymentOptions() {
               <p className="text-black text-bold">&#x20A6; {amount}</p>
             </span>
             <button
-              className="w-full text-white rounded-xl mt-8"
+              className="w-10/12 text-white rounded-xl mt-8"
               style={{
                 backgroundColor: "#4263EB",
-                width: "374px",
                 height: "45px",
               }}
               onClick={handleClick}
