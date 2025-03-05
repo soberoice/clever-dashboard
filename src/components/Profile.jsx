@@ -9,8 +9,8 @@ export default function Profile() {
   return (
     <div className="mx-auto w-11/12 mb-12">
       <div
-        style={{ width: "1213px", height: "798px" }}
-        className="flex bg-white w-11/12 my-8 flex flex-col p-8"
+        style={{ height: "798px" }}
+        className="flex bg-white md:w-full my-8 flex flex-col p-8 w-screen"
       >
         <p
           style={{ color: "#1B212D" }}

@@ -1,12 +1,14 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import SideNav from "../components/SideNav";
 import Navbar from "../components/Navbar";
-import { Navigate, Outlet, useNavigate } from "react-router";
+import { Navigate, Outlet, useLocation, useNavigate } from "react-router";
 import { useAuth } from "../contexts/authentication";
 
 export default function Dashboard() {
   const navigate = useNavigate();
   const { user, token } = useAuth();
+  const location = useLocation();
+  const [toggle, setToggle] = useState(false);
 
   return user && token ? (
     <div
@@ -14,12 +16,21 @@ export default function Dashboard() {
       className="font-semibold"
     >
       {useEffect(() => {
-        navigate("/dashboard");
+        if (location.pathname === "/") {
+          navigate("/dashboard", { replace: true });
+        }
       }, [])}
-      <div className="flex w-full">
-        <SideNav />
-        <div className="flex flex-col w-10/12">
-          <Navbar />
+      <div className="md:flex md:w-full">
+        <SideNav toggle={toggle} setToggle={setToggle} />
+        <div
+          className="md:relative md:flex flex-col w-10/12 relative md:flex-2"
+          onClick={() => {
+            if (toggle) {
+              setToggle(!toggle);
+            }
+          }}
+        >
+          <Navbar setToggle={setToggle} toggle={toggle} />
           <Outlet />
         </div>
       </div>

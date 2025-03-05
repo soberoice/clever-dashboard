@@ -38,7 +38,7 @@ export default function SigninForm() {
       </Snackbar>
       <div
         style={{ backgroundColor: "#F7F9FF" }}
-        className="mt-12 rounded-2xl flex flex-col py-4 px-12 w-100 h-80vh items-center"
+        className=" rounded-2xl flex flex-col py-4 px-12 w-96 md:w-100 h-80vh items-center"
       >
         <p className="text-4xl m-4">👋</p>
         <p className="text-3xl mt-2 mb-2">Welcome Back</p>

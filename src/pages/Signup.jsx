@@ -3,14 +3,18 @@ import SignupForm from "../components/SignupForm";
 
 export default function Signup() {
   return (
-    <div className="flex h-screen items-center">
+    <div className="md:flex items-center h-screen">
       <div
         style={{ backgroundColor: "#F7F9FF" }}
-        className="flex-1 flex justify-center bg-blue-50 h-full items-center"
+        className="flex-1 flex justify-center bg-blue-50 md:h-full"
       >
-        <img src="Clever.jpg" alt="" className=" m-0 h-full" />
+        <img
+          src="Clever.jpg"
+          alt=""
+          className="block md:block hidden h-full m-0"
+        />
       </div>
-      <div className="flex-1 flex justify-center">
+      <div className="md:flex-1 flex justify-center items-center bg-white h-full">
         <SignupForm />
       </div>
     </div>

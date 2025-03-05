@@ -8,11 +8,11 @@ export default function VirtualAccountForm({ toggleVirtualAccountModal }) {
   const dates = Array.from({ length: 31 }, (_, index) => index + 1);
   const years = Array.from({ length: 2026 - 2000 }, (_, index) => 2000 + index);
   return (
-    <div className="modal">
+    <div className="modal z-50">
       <div onClick={toggleVirtualAccountModal} className="overlay"></div>
       <div
-        style={{ width: "854px", height: "660px" }}
-        className="modal-content flex flex-col p-8 justify-center items-center"
+        style={{ height: "660px" }}
+        className="modal-content flex flex-col p-8 justify-center items-center w-11/12 md:w-4/12"
       >
         <button
           onClick={toggleVirtualAccountModal}
@@ -20,13 +20,13 @@ export default function VirtualAccountForm({ toggleVirtualAccountModal }) {
         >
           <IoMdClose />
         </button>
-        <div className="flex flex-col justify-center items-center">
+        <div className="flex flex-col justify-center items-center w-full">
           <p className="text-5xl text-bold my-4">
             Let’s Create a Virtual Account
           </p>
           <span
-            style={{ height: "400px", width: "400px" }}
-            className="flex gap-2 flex-col my-4"
+            style={{ height: "400px" }}
+            className="flex gap-2 flex-col my-4 w-full"
           >
             <span>
               <p className="text-2xl text-bold">BVN Deatails</p>
@@ -35,16 +35,16 @@ export default function VirtualAccountForm({ toggleVirtualAccountModal }) {
                 for you.{" "}
               </p>
             </span>
-            <span className="flex flex-col gap-6">
-              <span className="flex flex-col">
+            <span className="flex flex-col gap-6 w-full">
+              <span className="flex flex-col w-full">
                 <label>Bank Verification Number (BVN)</label>
                 <TextField label="1234567890" sx={{}} />
               </span>
-              <span className="flex flex-col">
+              <span className="flex flex-col w-full">
                 <label>Phone Number</label>
                 <TextField label="1234567890" sx={{}} />
               </span>
-              <span className="flex flex-col">
+              <span className="flex flex-col w-full">
                 <label htmlFor="">Date of birth</label>
                 <span className="flex justify-evenly">
                   <TextField
@@ -91,7 +91,6 @@ export default function VirtualAccountForm({ toggleVirtualAccountModal }) {
             className="w-full text-white rounded-xl"
             style={{
               backgroundColor: "#4263EB",
-              width: "500px",
               height: "45px",
             }}
           >

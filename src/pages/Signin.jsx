@@ -9,7 +9,7 @@ export default function Signin() {
   const horizontal = "right";
   const { message, setMessage } = useAuth();
   return (
-    <div className="flex items-center h-screen">
+    <div className="md:flex items-center h-screen">
       <Snackbar
         open={message}
         autoHideDuration={1200}
@@ -27,11 +27,15 @@ export default function Signin() {
       </Snackbar>
       <div
         style={{ backgroundColor: "#F7F9FF" }}
-        className="flex-1 flex justify-center bg-blue-50 h-full"
+        className="flex-1 flex justify-center bg-blue-50 md:h-full "
       >
-        <img src="Clever.jpg" alt="" className=" m-0 h-full" />
+        <img
+          src="Clever.jpg"
+          alt=""
+          className="block md:block hidden h-full m-0"
+        />
       </div>
-      <div className="flex-1 flex justify-center items-center bg-white h-full">
+      <div className="md:flex-1 flex justify-center items-center bg-white h-full">
         <SigninForm />
       </div>
     </div>

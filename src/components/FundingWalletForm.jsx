@@ -26,7 +26,7 @@ export default function FundWalletForm({ toggleModal }) {
   }
 
   return (
-    <div className="modal">
+    <div className="modal z-50">
       <Snackbar open={message} anchorOrigin={{ vertical, horizontal }}>
         <Alert severity="warning">
           <p className="flex items-center flex justify-between w-60">
@@ -51,27 +51,29 @@ export default function FundWalletForm({ toggleModal }) {
       </Snackbar>
       <div onClick={toggleModal} className="overlay"></div>
       <div
-        style={{ width: "594px", height: "396px" }}
-        className="modal-content flex flex-col p-8 justify-center items-center"
+        style={{ height: "396px" }}
+        className="modal-content w-screen flex flex-col p-8 justify-center items-center md:w-4/12"
       >
         <button onClick={toggleModal} className="close-modal text-2xl">
           <IoMdClose />
         </button>
-        <div>
+        <div className="w-11/12">
           <p className="text-2xl my-4">Fund Wallet</p>
-          <span style={{ height: "68px" }} className="flex gap-2 flex-col my-4">
+          <span
+            style={{ height: "68px" }}
+            className="flex gap-2 flex-col my-4 w-full"
+          >
             <label htmlFor="amount">Enter Amount</label>
             <input
               onChange={(e) => setValue(e.target.value)}
               style={{
-                width: "500px",
                 height: "40px",
                 border: "1px solid #E0E0E0",
               }}
               placeholder="1234567890"
               id="amount"
               type="text"
-              className="px-4"
+              className="px-4 w-full "
               value={value}
             />
           </span>
@@ -81,7 +83,6 @@ export default function FundWalletForm({ toggleModal }) {
               className="w-full text-white rounded-xl cursor-pointer"
               style={{
                 backgroundColor: "#4263EB",
-                width: "500px",
                 height: "45px",
               }}
             >

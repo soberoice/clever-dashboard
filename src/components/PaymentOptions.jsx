@@ -150,7 +150,11 @@ export default function PaymentOptions() {
               disabled={loading}
             >
               {loading ? (
-                <CircularProgress size="20px" className="my-auto" />
+                <CircularProgress
+                  size="20px"
+                  className="my-auto"
+                  color="inherit"
+                />
               ) : (
                 "Proceed"
               )}

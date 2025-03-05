@@ -31,7 +31,10 @@ export default function PersonalInfo() {
     console.log(result);
   };
   return (
-    <div style={{ width: "837px", height: "450px" }} className="flex flex-col">
+    <div
+      style={{ height: "450px" }}
+      className="flex flex-col w-11/12 md:w-9/12 "
+    >
       <Snackbar
         open={message}
         autoHideDuration={1200}
@@ -48,11 +51,11 @@ export default function PersonalInfo() {
         </Alert>
       </Snackbar>
       <p className="text-bold text-2xl pb-8">Personal Information</p>
-      <div>
+      <div className="w-full">
         <form
           action=""
-          style={{ gridTemplateColumns: "50% 50%" }}
-          className="grid gap-4"
+          // style={{ gridTemplateColumns: "50% 50%" }}
+          className="grid gap-4 grid-cols-1 md:grid-cols-2"
           onSubmit={handleSubmit}
         >
           <span className="flex flex-col">
@@ -63,12 +66,11 @@ export default function PersonalInfo() {
               style={{
                 border: "1px solid #F2F2F2",
                 height: "48px",
-                width: "390px",
                 marginTop: "10px",
               }}
               onChange={handleChange}
               placeholder="John"
-              className="px-4 rounded-xl"
+              className="px-4 rounded-xl w-full"
               type="text"
               id="first_name"
               name="first_name"
@@ -82,12 +84,12 @@ export default function PersonalInfo() {
               style={{
                 border: "1px solid #F2F2F2",
                 height: "48px",
-                width: "390px",
+
                 marginTop: "10px",
               }}
               onChange={handleChange}
               placeholder="Smith"
-              className="px-4 rounded-xl"
+              className="px-4 rounded-xl w-full"
               type="text"
               id="last_name"
               name="last_name"
@@ -101,10 +103,9 @@ export default function PersonalInfo() {
               style={{
                 border: "1px solid #F2F2F2",
                 height: "48px",
-                width: "390px",
                 marginTop: "10px",
               }}
-              className="px-4 rounded-xl text-gray-500"
+              className="px-4 rounded-xl text-gray-500 w-full"
               type="date"
               id="dob"
               name="dob"
@@ -118,12 +119,12 @@ export default function PersonalInfo() {
               style={{
                 border: "1px solid #F2F2F2",
                 height: "48px",
-                width: "390px",
+
                 marginTop: "10px",
               }}
               onChange={handleChange}
               placeholder="+123 456 7890"
-              className="px-4 rounded-xl"
+              className="px-4 rounded-xl w-full"
               type="number"
               id="phone"
               name="phone"
@@ -137,10 +138,9 @@ export default function PersonalInfo() {
               style={{
                 border: "1px solid #F2F2F2",
                 height: "48px",
-                width: "390px",
                 marginTop: "10px",
               }}
-              className="px-4 rounded-xl"
+              className="px-4 rounded-xl w-full"
               type="text"
               id="company-name"
               name="company-name"
@@ -154,12 +154,12 @@ export default function PersonalInfo() {
               style={{
                 border: "1px solid #F2F2F2",
                 height: "48px",
-                width: "390px",
+
                 marginTop: "10px",
               }}
               onChange={handleChange}
               placeholder="Nigeria"
-              className="px-4 rounded-xl"
+              className="px-4 rounded-xl w-full"
               type="text"
               id="country"
               name="country"
@@ -173,12 +173,12 @@ export default function PersonalInfo() {
               style={{
                 border: "1px solid #F2F2F2",
                 height: "48px",
-                width: "390px",
+
                 marginTop: "10px",
               }}
               onChange={handleChange}
               placeholder="Lagos"
-              className="px-4 rounded-xl"
+              className="px-4 rounded-xl w-full"
               type="text"
               id="state"
               name="state"
@@ -192,12 +192,12 @@ export default function PersonalInfo() {
               style={{
                 border: "1px solid #F2F2F2",
                 height: "48px",
-                width: "390px",
+
                 marginTop: "10px",
               }}
               onChange={handleChange}
               placeholder="Ikeja"
-              className="px-4 rounded-xl"
+              className="px-4 rounded-xl w-full"
               type="text"
               id="city"
               name="city"
@@ -206,10 +206,9 @@ export default function PersonalInfo() {
           <button
             style={{
               backgroundColor: "#4263EB",
-              width: "831px",
               height: "45px",
             }}
-            className="text-white rounded-xl mt-12 p-2"
+            className="text-white rounded-xl mt-12 p-2 w-full mb-12"
             type="submit"
             disabled={loading}
           >
