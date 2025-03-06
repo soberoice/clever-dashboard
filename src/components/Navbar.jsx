@@ -34,10 +34,10 @@ export default function Navbar({ setToggle, toggle }) {
   return (
     <div
       style={{ borderBottom: "1px solid #E9ECEF" }}
-      className="md:relative md:flex w-screen md:w-full md:px-8 mt-3 h-20 items-center text-xl border-b-1 bg-white flex top-0"
+      className="md:relative lg:flex w-screen md:w-full md:px-8 mt-3 h-20 items-center text-xl border-b-1 bg-white flex top-0"
     >
       {/* {console.log(user)} */}
-      <div className="font-semibold block md:hidden ml-2">
+      <div className="font-semibold block lg:hidden ml-2">
         <IoMenu className="text-3xl" onClick={() => setToggle(!toggle)} />
       </div>
       <div className="font-semibold hidden md:block">
@@ -53,7 +53,8 @@ export default function Navbar({ setToggle, toggle }) {
             height: "full",
             boxShadow: "none",
           }}
-          className="ml-auto w-full md:w-48 mx-auto fixed"
+          className="ml-auto w-full md:w-48 mx-auto fixed 
+            bg-transparent"
         >
           <AccordionSummary>
             <div>
@@ -67,7 +68,7 @@ export default function Navbar({ setToggle, toggle }) {
               </span>
             </div>
           </AccordionSummary>
-          <AccordionDetails className="" sx={{ backgroundColor: "none" }}>
+          <AccordionDetails className="bg-transparent">
             <button
               style={{ width: "190px", color: "red", border: "1px solid red" }}
               className="ml-auto bg-white h-15 text-red rounded-xl cursor-pointer"

@@ -33,7 +33,7 @@ export default function PersonalInfo() {
   return (
     <div
       style={{ height: "450px" }}
-      className="flex flex-col w-11/12 md:w-9/12 "
+      className="flex flex-col w-11/12 lg:w-9/12"
     >
       <Snackbar
         open={message}
@@ -54,8 +54,7 @@ export default function PersonalInfo() {
       <div className="w-full">
         <form
           action=""
-          // style={{ gridTemplateColumns: "50% 50%" }}
-          className="grid gap-4 grid-cols-1 md:grid-cols-2"
+          className="grid gap-4 grid-cols-1 md:grid-cols-2 w-full"
           onSubmit={handleSubmit}
         >
           <span className="flex flex-col">
@@ -208,7 +207,7 @@ export default function PersonalInfo() {
               backgroundColor: "#4263EB",
               height: "45px",
             }}
-            className="text-white rounded-xl mt-12 p-2 w-full mb-12"
+            className="text-white rounded-xl mt-12 p-2 w-full mb-12 md:col-span-2"
             type="submit"
             disabled={loading}
           >

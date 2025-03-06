@@ -53,13 +53,13 @@ export default function DashboardContent() {
       </Snackbar>
       <div className="flex justify-center mt-5 flex-col w-11/12">
         <div
-          className="flex rounded-lg p-4 px-2 md:p-8 w-80 md:w-full mx-auto"
+          className="flex rounded-lg p-4 px-2 md:p-8 w-80 w-full md:w-full"
           style={{
             backgroundColor: "#155EEF1A",
             border: "1px solid #155EEF1A",
           }}
         >
-          <div className="w-11/12 flex-1">
+          <div className="">
             <FaRegCheckCircle
               className="text-6xl m-4 p-4 rounded-lg"
               style={{ backgroundColor: "#155EEF1A", color: "#4263EB" }}
@@ -81,7 +81,7 @@ export default function DashboardContent() {
               Get Started &#8594;
             </button>
           </div>
-          <IoMdClose className="text-gray-400" />
+          <IoMdClose className="text-gray-400 ml-auto mb:ml-0" />
         </div>
         <Cards balance={userProfile?.wallet?.balance} />
         <MessageReportsTable />

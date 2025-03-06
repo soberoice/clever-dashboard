@@ -7,12 +7,12 @@ export default function SideNav({ toggle, setToggle }) {
   return (
     <div
       style={{ borderRight: "1px solid #E9ECEF" }}
-      className={`md:flex md:relative left-0 fixed border-gray-300 justify-evenly flex-col transition-all duration-300 md:w-80 md:p-3 h-screen border-r text-base bg-white z-10 overflow-hidden  ${
-        toggle ? "w-10/12" : "w-0"
+      className={`md:flex lg:relative left-0 fixed border-gray-300 justify-evenly flex-col transition-all duration-300 lg:w-80 lg:p-3 h-screen border-r text-base bg-white z-10 overflow-hidden  ${
+        toggle ? "w-80" : "w-0"
       }`}
     >
       <IoMdClose
-        className={`absolute top-4 right-4 text-3xl z-50 md:hidden ${
+        className={`absolute top-4 right-4 text-3xl z-50 lg:hidden ${
           toggle ? "block" : "hidden"
         }`}
         onClick={() => setToggle((prev) => !prev)}
@@ -20,7 +20,7 @@ export default function SideNav({ toggle, setToggle }) {
       <div
         className={`${
           toggle ? "block" : "hidden"
-        } flex-col m-5 md:flex transition-all duration-300 flex-nowrap w-full flex-nowrap transition-all duration-300`}
+        } flex-col m-5 lg:flex transition-all duration-300 flex-nowrap w-full flex-nowrap transition-all duration-300`}
       >
         <span
           className={`flex text-2xl font-bold mt-auto mb-4 items-center  w-full ${
