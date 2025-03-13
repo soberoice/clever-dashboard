@@ -22,7 +22,7 @@ export default function Profile() {
           </span>
         </p>
         <div
-          className="my-8 flex justify-between"
+          className="my-4 flex justify-between"
           style={{ border: "1px solid #EEEEEE", width: "216px" }}
         >
           <button
@@ -33,7 +33,7 @@ export default function Profile() {
               width: "106px",
               borderRadius: "4px",
             }}
-            className="text-white"
+            className="text-white cursor-pointer"
             onClick={() => {
               setActive("myProfile");
               setMessage("");
@@ -49,7 +49,7 @@ export default function Profile() {
               backgroundColor: active === "security" && "#3B5BDB",
               color: active === "security" ? "white" : "#9B9B9B",
             }}
-            className=""
+            className=" cursor-pointer"
             onClick={() => {
               setActive("security");
               setMessage("");

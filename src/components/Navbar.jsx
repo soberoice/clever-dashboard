@@ -43,8 +43,8 @@ export default function Navbar({ setToggle, toggle }) {
       <div className="font-semibold hidden md:block">
         Welcome, {user?.first_name} {user?.last_name}
       </div>
-      <div className="ml-auto h-18 w-70 md:w-86 md:flex md:gap-4">
-        <span className=" my-auto hidden md:flex">
+      <div className="ml-auto h-18 w-90 md:w-86 flex md:gap-4">
+        <span className=" my-auto flex">
           <FaRegBell className="mx-2" />
           <FiMoon className="mx-2" />
         </span>

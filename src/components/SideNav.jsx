@@ -20,7 +20,7 @@ export default function SideNav({ toggle, setToggle }) {
       <div
         className={`${
           toggle ? "block" : "hidden"
-        } flex-col m-5 lg:flex transition-all duration-300 flex-nowrap w-full flex-nowrap transition-all duration-300`}
+        } flex-col lg:flex mt-5 transition-all duration-300 flex-nowrap w-full transition-all duration-300`}
       >
         <span
           className={`flex text-2xl font-bold mt-auto mb-4 items-center  w-full ${
@@ -36,7 +36,7 @@ export default function SideNav({ toggle, setToggle }) {
             key={index}
             to={link.name.toLowerCase()}
             className={({ isActive }) =>
-              `rounded-lg block p-3 flex flex-row gap-2 text-base w-11/12 ${
+              `rounded-lg block p-3 flex flex-row gap-2 text-base w-full ${
                 isActive ? "bg-blue-500 text-white" : "text-black"
               } ${toggle ? "w-11/12" : "w-0"}`
             }
@@ -58,7 +58,7 @@ export default function SideNav({ toggle, setToggle }) {
           style={{ backgroundColor: "#F8F9FA" }}
         >
           <p className="flex justify-between">
-            Your plan <IoMdClose className="my-auto" />
+            Your plan <IoMdClose className="my-auto cursor-pointer" />
           </p>
           <div className="text-gray-500 flex flex-col text-sm gap-2">
             <span className="flex justify-between">

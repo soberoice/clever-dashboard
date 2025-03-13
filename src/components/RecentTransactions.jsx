@@ -18,14 +18,16 @@ export default function RecentTransactions({ transactions }) {
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead sx={{ bgcolor: "#F9FAFB" }}>
             <TableRow className="font-bold text-xl">
-              <TableCell sx={{ width: "500px" }}>Transaction ID</TableCell>
-              <TableCell sx={{ width: "500px" }} align="right">
+              <TableCell sx={{ width: "300px" }}>Transaction ID</TableCell>
+              <TableCell sx={{ width: "300px" }} align="right">
                 Transactions
               </TableCell>
               <TableCell sx={{ width: "150px" }} align="center">
                 Amount
               </TableCell>
-              <TableCell align="right">Time</TableCell>
+              <TableCell sx={{ width: "150px" }} align="right">
+                Time
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>

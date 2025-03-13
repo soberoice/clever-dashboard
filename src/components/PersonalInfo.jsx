@@ -1,9 +1,7 @@
 import React, { useState } from "react";
-import { MdOutlineEmail } from "react-icons/md";
 import { useAuth } from "../contexts/authentication";
 import { Alert, CircularProgress, Snackbar } from "@mui/material";
-import { IoClose, IoCloseCircleOutline } from "react-icons/io5";
-import { IoIosCheckmarkCircleOutline } from "react-icons/io";
+import { IoCloseCircleOutline } from "react-icons/io5";
 
 export default function PersonalInfo() {
   const vertical = "top";
@@ -131,7 +129,7 @@ export default function PersonalInfo() {
           </span>
           <span className="flex flex-col">
             <label className="" htmlFor="Email">
-              Company Name
+              E-mail
             </label>
             <input
               style={{
@@ -140,8 +138,9 @@ export default function PersonalInfo() {
                 marginTop: "10px",
               }}
               className="px-4 rounded-xl w-full"
-              type="text"
+              type="email"
               id="company-name"
+              placeholder="example@example.com"
               name="company-name"
             />
           </span>
@@ -207,7 +206,7 @@ export default function PersonalInfo() {
               backgroundColor: "#4263EB",
               height: "45px",
             }}
-            className="text-white rounded-xl mt-12 p-2 w-full mb-12 md:col-span-2"
+            className="text-white rounded-xl mt-4 p-2 w-full md:col-span-2"
             type="submit"
             disabled={loading}
           >
