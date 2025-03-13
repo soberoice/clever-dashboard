@@ -84,6 +84,7 @@ export default function Cards({ balance }) {
           </button>
         </div>
       </div>{" "}
+      // FUND WALLET MODAL
       {modal && <FundWalletForm toggleModal={toggleModal} />}
     </div>
   );

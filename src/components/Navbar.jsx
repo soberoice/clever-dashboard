@@ -11,6 +11,7 @@ import { useNavigate } from "react-router";
 import { IoMenu } from "react-icons/io5";
 
 export default function Navbar({ setToggle, toggle }) {
+  const [modal, setModal] = useState(false);
   const { user, setMessage } = useAuth();
   const string = `${user?.first_name?.slice(0, 1)}${user?.last_name?.slice(
     0,
@@ -42,41 +43,37 @@ export default function Navbar({ setToggle, toggle }) {
       <div className="font-semibold hidden md:block">
         Welcome, {user?.first_name} {user?.last_name}
       </div>
-      <div className="ml-auto h-18 w-70 md:w-80 md:flex md:gap-4">
+      <div className="ml-auto h-18 w-70 md:w-86 md:flex md:gap-4">
         <span className=" my-auto hidden md:flex">
           <FaRegBell className="mx-2" />
           <FiMoon className="mx-2" />
         </span>
-        <Accordion
-          sx={{
-            height: "full",
-            boxShadow: "none",
-          }}
-          className="ml-auto w-full md:w-48 mx-auto fixed 
-            bg-transparent"
-        >
-          <AccordionSummary>
-            <div>
-              <span className="flex">
-                <Avatar className="mr-2">{string?.toUpperCase()}</Avatar>
-                <span className="flex flex-col text-sm">
-                  <span>{user?.username}</span>
-                  {user?.email}
-                </span>
-                <IoIosArrowDown className="ml-4 my-auto" />
-              </span>
-            </div>
-          </AccordionSummary>
-          <AccordionDetails className="bg-transparent">
-            <button
-              style={{ width: "190px", color: "red", border: "1px solid red" }}
-              className="ml-auto bg-white h-15 text-red rounded-xl cursor-pointer bg-transparent"
-              onClick={handleLogout}
-            >
-              Sign Out
-            </button>
-          </AccordionDetails>
-        </Accordion>
+        <span className="flex flex-col items-center my-auto h-full">
+          <span
+            onClick={() => setModal(!modal)}
+            className="flex cursor-pointer my-auto"
+          >
+            <Avatar className="mr-2">{string?.toUpperCase()}</Avatar>
+            <span className="flex flex-col text-sm">
+              <span>{user?.username}</span>
+              {user?.email}
+            </span>
+            <IoIosArrowDown
+              className={`ml-4 my-auto ${
+                modal ? "-rotate-180" : ""
+              } transition-all duration-300`}
+            />
+          </span>
+          <button
+            style={{ width: "190px", color: "red" }}
+            className={`bg-white text-red rounded-xl cursor-pointer bg-transparent absolute mt-18 transition-all duration-300  ${
+              modal ? "h-15 border" : "h-0 border-0"
+            }`}
+            onClick={handleLogout}
+          >
+            <p className={`${modal ? "block" : "hidden"}`}>Sign Out</p>
+          </button>
+        </span>
       </div>
     </div>
   );

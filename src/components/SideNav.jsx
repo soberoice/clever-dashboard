@@ -36,9 +36,9 @@ export default function SideNav({ toggle, setToggle }) {
             key={index}
             to={link.name.toLowerCase()}
             className={({ isActive }) =>
-              `rounded-lg block p-3 flex flex-row gap-2 text-base w-full ${
+              `rounded-lg block p-3 flex flex-row gap-2 text-base w-11/12 ${
                 isActive ? "bg-blue-500 text-white" : "text-black"
-              } ${toggle ? "w-full" : "w-0"}`
+              } ${toggle ? "w-11/12" : "w-0"}`
             }
             onClick={() => {
               setToggle(false);

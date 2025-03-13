@@ -1,6 +1,6 @@
 import { createContext, useState, useContext, useEffect } from "react";
 import axios from "axios";
-import { Navigate, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 
 // Create AuthContext
 const AuthContext = createContext();
@@ -10,12 +10,13 @@ export const useAuth = () => useContext(AuthContext);
 
 // Auth Provider Component
 export const AuthProvider = ({ children }) => {
+  // Collect the user data stored localy
   const [user, setUser] = useState(() => {
     const storedUser = localStorage?.getItem("userData");
     try {
       return storedUser ? JSON.parse(storedUser) : null;
     } catch (error) {
-      // console.error("Failed to parse userData:", error);
+      console.error("Failed to parse userData:", error);
       return null;
     }
   });
@@ -24,13 +25,14 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
-  // const amount = localStorage?.getItem("amountToPay");
 
   //SIGN IN FUNCTION
   const signIn = async (formData) => {
     setLoading(true);
     setError(null);
     setMessage("");
+
+    // GET RESPONSE FROM API
     try {
       const response = await axios.post(
         "https://smsapi-0110.jarapay.ng/api/v1/auth/login",
@@ -41,11 +43,13 @@ export const AuthProvider = ({ children }) => {
       const userData = response?.data?.data?.user; // Assuming API returns user details
       const authToken = response.data.data.token;
 
+      // SAVE USER DATA AND TOKEN LOCALY
       localStorage.setItem("userData", JSON.stringify(userData));
       localStorage.setItem("authToken", authToken);
 
       console.log(response);
 
+      // SET TOKEN AND USER DATA
       setToken(authToken);
       setUser(userData);
       navigate("/dashboard");
@@ -54,8 +58,10 @@ export const AuthProvider = ({ children }) => {
         setMessage("");
       }, 6000);
     } catch (err) {
+      // SET ERROR
       setError(err.response?.data?.message || "Something went wrong");
     } finally {
+      //SET LOADING FALSE AND REMOVE MESSAGE
       setLoading(false);
       setTimeout(() => {
         setError("");
@@ -67,6 +73,8 @@ export const AuthProvider = ({ children }) => {
   const signUp = async (formData) => {
     setLoading(true);
     setError(null);
+
+    // GET RESPONSE FROM API
     try {
       const updateResponse = await axios.post(
         "https://smsapi-0110.jarapay.ng/api/v1/auth/register",
@@ -74,12 +82,13 @@ export const AuthProvider = ({ children }) => {
         { headers: { "Content-Type": "application/json" } }
       );
 
-      //   setUser(response?.data?.user);
-      console.log(updateResponse);
       navigate("/signin");
     } catch (err) {
+      // SET ERROR
+
       setError(err.response?.data?.message || "Something went wrong");
     } finally {
+      //SET LOADING FALSE AND REMOVE MESSAGE
       setLoading(false);
       setTimeout(() => {
         setError("");
@@ -102,17 +111,19 @@ export const AuthProvider = ({ children }) => {
       const updatedUser = response.data.data;
       console.log(updatedUser);
       setUser(updatedUser);
-      localStorage.setItem("userData", JSON.stringify(updatedUser));
 
-      //   setUser(response?.data?.user);
+      // CHANGE USERDATA LOCALY
+      localStorage.setItem("userData", JSON.stringify(updatedUser));
 
       setMessage("Account Updated Successfully");
       setTimeout(() => {
         setMessage("");
       }, 9000);
     } catch (err) {
+      // SET ERROR
       setError(err.response?.data?.message || "Something went wrong");
     } finally {
+      //SET LOADING FALSE AND REMOVE MESSAGE
       setLoading(false);
       setTimeout(() => {
         setError("");
