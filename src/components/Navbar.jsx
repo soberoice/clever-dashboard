@@ -1,7 +1,6 @@
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
-import Typography from "@mui/material/Typography";
 import React, { useState } from "react";
 import { FaRegBell } from "react-icons/fa";
 import { FiMoon } from "react-icons/fi";
@@ -71,7 +70,7 @@ export default function Navbar({ setToggle, toggle }) {
           <AccordionDetails className="bg-transparent">
             <button
               style={{ width: "190px", color: "red", border: "1px solid red" }}
-              className="ml-auto bg-white h-15 text-red rounded-xl cursor-pointer"
+              className="ml-auto bg-white h-15 text-red rounded-xl cursor-pointer bg-transparent"
               onClick={handleLogout}
             >
               Sign Out

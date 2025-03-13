@@ -21,7 +21,7 @@ export default function Cards({ balance }) {
         <div className="flex justify-between">
           <span className="flex flex-col mt-4">
             <span className="text-xs md:text-sm">Wallet Balance</span>{" "}
-            <span className="text-3xl md:text-4xl w-40">
+            <span className="text-3xl md:text-4xl w-40 ">
               &#x20A6; {balance || "0.00"}
             </span>
           </span>
