@@ -6,11 +6,12 @@ import MessageReportsTable from "./MessageReportsTable";
 import { useAuth } from "../contexts/authentication";
 import { Alert, Snackbar } from "@mui/material";
 import { IoCloseCircleOutline } from "react-icons/io5";
+import axios from "axios";
 
 export default function DashboardContent() {
   const vertical = "top";
   const horizontal = "right";
-  const { message, setMessage, token } = useAuth();
+  const { message, setMessage, token, loading, setLoading } = useAuth();
   const [userProfile, setUserProfile] = useState(() => {
     const storedUser = localStorage?.getItem("userProfile");
     try {
@@ -21,18 +22,36 @@ export default function DashboardContent() {
     }
   });
 
+  const getUserInfo = async () => {
+    try {
+      const response = await axios.get(
+        "https://smsapi-0110.jarapay.ng/api/v1/user/profile",
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+
+      const userProfile = response?.data?.data;
+      console.log(userProfile);
+      localStorage.setItem("userProfile", JSON.stringify(userProfile));
+    } catch (err) {
+      setError(err.response?.data?.message || "Something went wrong");
+    } finally {
+      // setLoading(false);
+    }
+  };
+
   useEffect(() => {
-    fetch("https://smsapi-0110.jarapay.ng/api/v1/user/profile", {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
-      .then((response) => response.json())
-      .then((data) =>
-        localStorage.setItem("userProfile", JSON.stringify(data.data))
-      )
-      .catch((error) => console.error("Error fetching data:", error));
+    getUserInfo();
+    //   fetch("https://smsapi-0110.jarapay.ng/api/v1/user/profile", {
+    //     method: "GET",
+    //     headers: {
+    //       Authorization: `Bearer ${token}`,
+    //     },
+    //   })
+    //     .then((response) => response.json())
+    //     .then((data) =>
+    //       localStorage.setItem("userProfile", JSON.stringify(data.data))
+    //     )
+    //     .catch((error) => console.error("Error fetching data:", error));
   }, []);
   return (
     <div className=" w-screen md:w-full items-center justify-center mx-auto flex flex-col">

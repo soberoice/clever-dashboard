@@ -20,7 +20,7 @@ export default function SideNav({ toggle, setToggle }) {
       <div
         className={`${
           toggle ? "block" : "hidden"
-        } flex-col lg:flex mt-5 transition-all duration-300 flex-nowrap w-full transition-all duration-300`}
+        } flex-col lg:flex mt-5 p-3 lg:p-0 transition-all duration-300 flex-nowrap w-full transition-all duration-300`}
       >
         <span
           className={`flex text-2xl font-bold mt-auto mb-4 items-center  w-full ${

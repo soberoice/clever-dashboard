@@ -2,9 +2,12 @@ import React, { useState } from "react";
 import { FaArrowUp } from "react-icons/fa";
 import { SlOptionsVertical } from "react-icons/sl";
 import FundWalletForm from "./FundingWalletForm";
+import { CircularProgress } from "@mui/material";
+import { useAuth } from "../contexts/authentication";
 
 export default function Cards({ balance }) {
   const [modal, setModal] = useState(false);
+  const { loading } = useAuth();
   function toggleModal() {
     setModal(!modal);
   }
@@ -22,7 +25,7 @@ export default function Cards({ balance }) {
           <span className="flex flex-col mt-4">
             <span className="text-xs md:text-sm">Wallet Balance</span>{" "}
             <span className="text-3xl md:text-4xl w-40 ">
-              &#x20A6; {balance || "0.00"}
+              &#x20A6; {balance}
             </span>
           </span>
           <button

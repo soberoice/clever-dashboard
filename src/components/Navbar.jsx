@@ -11,6 +11,7 @@ import { useNavigate } from "react-router";
 import { IoMenu } from "react-icons/io5";
 
 export default function Navbar({ setToggle, toggle }) {
+  const nav = useNavigate();
   const [modal, setModal] = useState(false);
   const { user, setMessage } = useAuth();
   const string = `${user?.first_name?.slice(0, 1)}${user?.last_name?.slice(
@@ -21,9 +22,10 @@ export default function Navbar({ setToggle, toggle }) {
   const navigate = useNavigate();
   // Function to clear storage and redirect
   const handleLogout = () => {
-    window.location.reload();
+    nav("/signin");
     setMessage("Signed out Successfully");
     localStorage.removeItem("authToken");
+    localStorage.removeItem("userProfile");
     localStorage.removeItem("userData"); // Clear token
     // setUser({});
     setTimeout(() => {
